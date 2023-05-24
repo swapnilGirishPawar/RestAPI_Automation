@@ -1,4 +1,5 @@
 package airlines;
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.gherkin.model.ScenarioOutline;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -17,7 +18,6 @@ public class AirlineTests extends AirlineAPIs{
     // create Airline API:-
     @Test
     public void createAirline() throws IOException {
-
         Map<String, Object> payload = payloads.getCreateAirlinePayloadFromMap("98945", "Swapnil Airways", "IN", "ABC", "ABC Slogan", "Pune", "xyzz.com", "2023");
         Response response = createAirline(payload);
         Assert.assertEquals(response.statusCode(), 200);
@@ -25,7 +25,6 @@ public class AirlineTests extends AirlineAPIs{
 // create passenger API:-
     @Test
     public void createPassenger() throws IOException {
-
         Map<String, Object> payload = payloads.getCreatePassengerPayloadFromMap("Swapnil", 10, 15);
         Response response = createPassenger(payload);
         Assert.assertEquals(response.statusCode(), 200);
