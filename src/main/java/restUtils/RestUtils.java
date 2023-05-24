@@ -26,4 +26,33 @@ public class RestUtils {
                 .post()
                 .then().log().all().extract().response();
     }
+
+    public static Response performGet(String endPoint, Map<String, String>headers){
+        return RestAssured.given().log().all()
+                .baseUri(endPoint)
+                .headers(headers)
+                .contentType(ContentType.JSON)
+                .get()
+                .then().log().all().extract().response();
+    }
+
+    public static Response performDelete(String endPoint, Map<String, Object> requestPayload, Map<String, String>headers){
+        return RestAssured.given().log().all()
+                .baseUri(endPoint)
+                .headers(headers)
+                .contentType(ContentType.JSON)
+                .body(requestPayload)
+                .delete()
+                .then().log().all().extract().response();
+    }
+
+    public static Response performPatch(String endPoint, Map<String, Object> requestPayload, Map<String, String>headers){
+        return RestAssured.given().log().all()
+                .baseUri(endPoint)
+                .headers(headers)
+                .contentType(ContentType.JSON)
+                .body(requestPayload)
+                .patch()
+                .then().log().all().extract().response();
+    }
 }

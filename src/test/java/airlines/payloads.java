@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class payloads {
+
+    // Creation of payload by using string method is not better than creating the payloads with the hashmaps
+
     public static String getCreateAirlinePayloadFromString(String id, String name, String country, String logo, String slogan, String head_quaters, String website, String established){
         String payload = "{\n" +
                 "    \"id\": "+id+",\n" +
@@ -27,6 +30,21 @@ public class payloads {
         payload.put("head_quaters", head_quaters);
         payload.put("website", website);
         payload.put("established", established);
+        return payload;
+    }
+    public static String getCreateAirlinePayloadFromString(String name, int trips, int airline){
+        String payload = "{\n" +
+                "    \"name\": \""+name+"\",\n" +
+                "    \"trips\": "+trips+",\n" +
+                "    \"airline\": "+airline+"\n" +
+                "}";
+        return payload;
+    }
+    public static Map getCreatePassengerPayloadFromMap(String name, int trips, int airline){
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("name", name);
+        payload.put("trips", trips);
+        payload.put("airline", airline);
         return payload;
     }
 

@@ -14,6 +14,7 @@ import java.util.Map;
 // edit configuration of mavenRunning with command "test -D env = qa"
 
 public class AirlineTests {
+    // create Airline API:-
     @Test
     public void createAirline() throws IOException {
         String env = System.getProperty("env") == null ? "qa" : "dev";
@@ -21,6 +22,15 @@ public class AirlineTests {
         String endPoint = data.get("createAirLineEndpoint");
         Map<String, Object> payload = payloads.getCreateAirlinePayloadFromMap("98905", "Swapnil Airways", "IN", "ABC", "ABC Slogan", "Pune", "xyzz.com", "2023");
         Response response = RestUtils.performPost(endPoint, payload, new HashMap<String, String>());
+        Assert.assertEquals(response.statusCode(), 200);
+    }
+// create passenger API:-
+    @Test
+    public void createPassenger() throws IOException {
+        Map<String, String> data = jsonUtils.getJsonDataAsMap("airlines/qa/airlinesApiData.json");
+        String endPoint = data.get("createPassengerEndpoint");
+        Map<String, Object> payload =  payloads.getCreatePassengerPayloadFromMap("Swapnil", 10, 15);
+        Response response = RestUtils.performPost(endPoint, payload,new HashMap<String, String>());
         Assert.assertEquals(response.statusCode(), 200);
     }
 }
