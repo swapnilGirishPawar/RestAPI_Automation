@@ -1,4 +1,4 @@
-package airline;
+package airlines;
 
 import java.util.HashMap;
 import java.util.Map;
