@@ -18,7 +18,7 @@ public class AirlineTests extends AirlineAPIs{
     // create Airline API:-
     @Test
     public void createAirline() throws IOException {
-        Map<String, Object> payload = payloads.getCreateAirlinePayloadFromMap("98945", "Swapnil Airways", "IN", "ABC", "ABC Slogan", "Pune", "xyzz.com", "2023");
+        Map<String, Object> payload = payloads.getCreateAirlinePayloadFromMap("989437", "Swapnil Airways", "IN", "ABC", "ABC Slogan", "Pune", "xyzz.com", "2023");
         Response response = createAirline(payload);
         Assert.assertEquals(response.statusCode(), 200);
     }
