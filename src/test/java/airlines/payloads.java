@@ -1,7 +1,14 @@
 package airlines;
 
+import net.datafaker.Faker;
+import org.apache.commons.lang3.RandomStringUtils;
+import utils.DateUtils;
+import utils.RandomDataGenerator;
+import utils.RandomDataTypeNames;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class payloads {
 
@@ -32,6 +39,20 @@ public class payloads {
         payload.put("established", established);
         return payload;
     }
+    // Using dataFaker:-
+    public static Map getCreateAirlinePayloadFromMap(){
+        Map<String, Object> payload = new HashMap<>();
+        Faker faker = new Faker();
+        payload.put("id", RandomDataGenerator.getRandomNumber(10));
+        payload.put("name", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME));
+        payload.put("country", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY));
+        payload.put("logo", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME));
+        payload.put("slogan", RandomDataGenerator.getRandomAlphabate(20));
+        payload.put("head_quaters", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME));
+        payload.put("website", RandomDataGenerator.getRandomWebiste());
+        payload.put("established",RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()));
+        return payload;
+    }
     public static String getCreateAirlinePayloadFromString(String name, int trips, int airline){
         String payload = "{\n" +
                 "    \"name\": \""+name+"\",\n" +
@@ -45,6 +66,14 @@ public class payloads {
         payload.put("name", name);
         payload.put("trips", trips);
         payload.put("airline", airline);
+        return payload;
+    }
+    public static Map getCreatePassengerPayloadFromMap(){
+        Map<String, Object> payload = new HashMap<>();
+        Faker faker = new Faker();
+        payload.put("name", faker.name().firstName());
+        payload.put("trips", faker.number().digit());
+        payload.put("airline", faker.number().digit());
         return payload;
     }
 

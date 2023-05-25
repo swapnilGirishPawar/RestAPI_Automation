@@ -1,6 +1,6 @@
 package airlines;
 
-import utils.jsonUtils;
+import utils.JsonUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -11,9 +11,9 @@ public class Base {
 
 
     static{
-        String env = System.getProperty("env") == null ? "qa" : "dev";
+//        String env = System.getProperty("env") == null ? "qa" : "dev";
         try {
-            dataFromJsonFile = jsonUtils.getJsonDataAsMap("airlines/"+env+"/airlinesApiData.json");
+            dataFromJsonFile = JsonUtils.getJsonDataAsMap("/airlines/qa/airlinesApiData.json");
         } catch (IOException e) {
             e.printStackTrace();
         }

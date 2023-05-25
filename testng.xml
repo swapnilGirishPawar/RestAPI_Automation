@@ -2,17 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <listeners>
-        <listener class-name="reporting.ExtentReportManager"/>
-        <listener class-name="reporting.Setup"/>
+        <listener class-name="reporting.Setup"></listener>
     </listeners>
-    <test verbose="2" preserve-order="true"
-          name="/Users/admin/Downloads/RestAPI_Automation/src/test/java/airlines/AirlineTests.java">
+    <test verbose="2" preserve-order="true" name="/Users/admin/Downloads/RestAPI_Automation/src/test/java/airlines/AirlineTests.java">
         <classes>
             <class name="airlines.AirlineTests">
                 <methods>
                     <include name="createAirline"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+                    <include name="createPassenger"/>
+                </methods></class></classes></test>
 </suite>

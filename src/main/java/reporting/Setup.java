@@ -7,26 +7,32 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import java.util.Arrays;
 
 public class Setup implements ITestListener {
-    public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
-    private static ExtentReports extentReport;
+    public static ExtentReports extentReports;
+    public static ThreadLocal<ExtentTest> extentTest;
+
+
     @Override
     public void onStart(ITestContext var1){
+        System.out.println("Before");
+        System.out.println("extentTest:- "+extentTest);
         String fileName = ExtentReportManager.getReportNameWithTimeStamp();
-        String fullReportPath = System.getProperty("user.dir") +"\\Reports\\"+ fileName;
-        extentReport = ExtentReportManager.createInstance(fullReportPath, "Test API Automation Report", "Test Execution Report");
+        String fullReportPath = System.getProperty("user.dir") + "\\reports\\" + fileName;
+        extentReports = ExtentReportManager.createInstance(fullReportPath, "Test API Automation Report", "Test ExecutionReport");
     }
-
+    @Override
     public void onFinish(ITestContext var1){
         // after completion -> flush the report
-        if(extentReport != null)
-            extentReport.flush();
+        if (extentReports != null)
+            extentReports.flush();
     }
-
+    @Override
     public void onTestStart(ITestResult iTestResult) {
-        ExtentTest test =  extentReport.createTest("Test Name = "+iTestResult.getTestClass().getName() + " - " + iTestResult.getMethod().getMethodName());
-        extentTest.set(test); // this will set the thread which is currently running.
+        ExtentTest test = extentReports.createTest("Test Name " + iTestResult.getTestClass().getName() + " - " + iTestResult.getMethod().getMethodName(),
+                iTestResult.getMethod().getDescription());
+        extentTest.set(test);
     }
 
     @Override
@@ -36,7 +42,14 @@ public class Setup implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-
+        ExtentReportManager.logFailDetails(iTestResult.getThrowable().getMessage());
+        String stackTrace = Arrays.toString(iTestResult.getThrowable().getStackTrace());
+        stackTrace = stackTrace.replaceAll(",", "<br>");
+        String formmatedTrace = "<details>\n" +
+                "    <summary>Click Here To See Exception Logs</summary>\n" +
+                "    " + stackTrace + "\n" +
+                "</details>\n";
+        ExtentReportManager.logExceptionDetails(formmatedTrace);
     }
 
     @Override
@@ -48,6 +61,4 @@ public class Setup implements ITestListener {
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
 
     }
-
-
 }

@@ -33,8 +33,8 @@ public class RestUtils extends ExtentReportManager{
     public static Response performPost(String endPoint, Map<String, Object> requestPayload, Map<String, String>headers){
         RequestSpecification requestSpecification = getRequestSpecification(endPoint, requestPayload, headers);
         Response response = requestSpecification.post();
-        printRequestLogInRequest(requestSpecification);
-        printResponseLogInReport(response);
+//        printRequestLogInRequest(requestSpecification);
+//        printResponseLogInReport(response);
         return response;
 
     }
