@@ -1,5 +1,6 @@
 package airlines;
 
+import airlines.Pojos.Airline;
 import net.datafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import utils.DateUtils;
@@ -43,7 +44,7 @@ public class payloads {
     public static Map getCreateAirlinePayloadFromMap(){
         Map<String, Object> payload = new HashMap<>();
         Faker faker = new Faker();
-        payload.put("id", RandomDataGenerator.getRandomNumber(10));
+        payload.put("id", RandomDataGenerator.getRandomNumber(5));
         payload.put("name", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME));
         payload.put("country", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY));
         payload.put("logo", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME));
@@ -53,6 +54,8 @@ public class payloads {
         payload.put("established",RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()));
         return payload;
     }
+
+    // passenger payload using parameterization & string body.
     public static String getCreateAirlinePayloadFromString(String name, int trips, int airline){
         String payload = "{\n" +
                 "    \"name\": \""+name+"\",\n" +
@@ -61,6 +64,8 @@ public class payloads {
                 "}";
         return payload;
     }
+
+    // passenger payload using parameterization.
     public static Map getCreatePassengerPayloadFromMap(String name, int trips, int airline){
         Map<String, Object> payload = new HashMap<>();
         payload.put("name", name);
@@ -68,13 +73,29 @@ public class payloads {
         payload.put("airline", airline);
         return payload;
     }
+
+    // passenger payload using ENUM
     public static Map getCreatePassengerPayloadFromMap(){
         Map<String, Object> payload = new HashMap<>();
         Faker faker = new Faker();
-        payload.put("name", faker.name().firstName());
-        payload.put("trips", faker.number().digit());
-        payload.put("airline", faker.number().digit());
+        payload.put("name", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME));
+        payload.put("trips", RandomDataGenerator.getRandomNumber(2));
+        payload.put("airline",RandomDataGenerator.getRandomNumber(1));
         return payload;
     }
 
+    // creating payload using pojo as airline return type
+    public static Airline getCreateAirlineFromPojo(){
+        return Airline
+                    .builder()
+                    .id(Integer.parseInt(RandomDataGenerator.getRandomNumber(10)))
+                    .name(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME))
+                    .country(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY))
+                    .logo(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME))
+                    .slogan(RandomDataGenerator.getRandomAlphabate(20))
+                    .head_quaters(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME))
+                    .website(RandomDataGenerator.getRandomWebiste())
+                    .established(RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()))
+                    .build();
+    }
 }

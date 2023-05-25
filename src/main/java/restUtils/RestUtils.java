@@ -36,7 +36,11 @@ public class RestUtils extends ExtentReportManager{
 //        printRequestLogInRequest(requestSpecification);
 //        printResponseLogInReport(response);
         return response;
-
+    }
+    public static Response performPost(String endPoint, Object requestPayloadAsPojo, Map<String, String>headers){
+        RequestSpecification requestSpecification = getRequestSpecification(endPoint, requestPayloadAsPojo, headers);
+        Response response = requestSpecification.post();
+        return response;
     }
 
     // this post method accept payload as a Map of String, Object
