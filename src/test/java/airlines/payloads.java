@@ -1,34 +1,36 @@
 package airlines;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import airlines.Pojos.Airline;
 import net.datafaker.Faker;
-import org.apache.commons.lang3.RandomStringUtils;
 import utils.DateUtils;
 import utils.RandomDataGenerator;
 import utils.RandomDataTypeNames;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 public class payloads {
 
-    // Creation of payload by using string method is not better than creating the payloads with the hashmaps
+    // Creation of payload by using string method is not better than creating the
+    // payloads with the hashmaps
 
-    public static String getCreateAirlinePayloadFromString(String id, String name, String country, String logo, String slogan, String head_quaters, String website, String established){
+    public static String getCreateAirlinePayloadFromString(String id, String name, String country, String logo,
+            String slogan, String head_quaters, String website, String established) {
         String payload = "{\n" +
-                "    \"id\": "+id+",\n" +
-                "    \"name\": \""+name+"\",\n" +
-                "    \"country\": \""+country+"\",\n" +
-                "    \"logo\": \""+logo+"\",\n" +
-                "    \"slogan\": \""+slogan+"\",\n" +
-                "    \"head_quaters\": \""+head_quaters+"\",\n" +
-                "    \"website\": \""+website+"\",\n" +
-                "    \"established\": \""+established+"\"\n" +
+                "    \"id\": " + id + ",\n" +
+                "    \"name\": \"" + name + "\",\n" +
+                "    \"country\": \"" + country + "\",\n" +
+                "    \"logo\": \"" + logo + "\",\n" +
+                "    \"slogan\": \"" + slogan + "\",\n" +
+                "    \"head_quaters\": \"" + head_quaters + "\",\n" +
+                "    \"website\": \"" + website + "\",\n" +
+                "    \"established\": \"" + established + "\"\n" +
                 "}";
         return payload;
     }
-    public static Map getCreateAirlinePayloadFromMap(String id, String name, String country, String logo, String slogan, String head_quaters, String website, String established){
+
+    public static Map getCreateAirlinePayloadFromMap(String id, String name, String country, String logo, String slogan,
+            String head_quaters, String website, String established) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("id", id);
         payload.put("name", name);
@@ -40,8 +42,9 @@ public class payloads {
         payload.put("established", established);
         return payload;
     }
+
     // Using dataFaker:-
-    public static Map getCreateAirlinePayloadFromMap(){
+    public static Map getCreateAirlinePayloadFromMap() {
         Map<String, Object> payload = new HashMap<>();
         Faker faker = new Faker();
         payload.put("id", RandomDataGenerator.getRandomNumber(5));
@@ -51,22 +54,22 @@ public class payloads {
         payload.put("slogan", RandomDataGenerator.getRandomAlphabate(20));
         payload.put("head_quaters", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME));
         payload.put("website", RandomDataGenerator.getRandomWebiste());
-        payload.put("established",RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()));
+        payload.put("established", RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()));
         return payload;
     }
 
     // passenger payload using parameterization & string body.
-    public static String getCreateAirlinePayloadFromString(String name, int trips, int airline){
+    public static String getCreateAirlinePayloadFromString(String name, int trips, int airline) {
         String payload = "{\n" +
-                "    \"name\": \""+name+"\",\n" +
-                "    \"trips\": "+trips+",\n" +
-                "    \"airline\": "+airline+"\n" +
+                "    \"name\": \"" + name + "\",\n" +
+                "    \"trips\": " + trips + ",\n" +
+                "    \"airline\": " + airline + "\n" +
                 "}";
         return payload;
     }
 
     // passenger payload using parameterization.
-    public static Map getCreatePassengerPayloadFromMap(String name, int trips, int airline){
+    public static Map getCreatePassengerPayloadFromMap(String name, int trips, int airline) {
         Map<String, Object> payload = new HashMap<>();
         payload.put("name", name);
         payload.put("trips", trips);
@@ -75,27 +78,27 @@ public class payloads {
     }
 
     // passenger payload using ENUM
-    public static Map getCreatePassengerPayloadFromMap(){
+    public static Map getCreatePassengerPayloadFromMap() {
         Map<String, Object> payload = new HashMap<>();
         Faker faker = new Faker();
         payload.put("name", RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME));
         payload.put("trips", RandomDataGenerator.getRandomNumber(2));
-        payload.put("airline",RandomDataGenerator.getRandomNumber(1));
+        payload.put("airline", RandomDataGenerator.getRandomNumber(1));
         return payload;
     }
 
     // creating payload using pojo as airline return type
-    public static Airline getCreateAirlineFromPojo(){
+    public static Airline getCreateAirlineFromPojo() {
         return Airline
-                    .builder()
-                    .id(Integer.parseInt(RandomDataGenerator.getRandomNumber(10)))
-                    .name(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME))
-                    .country(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY))
-                    .logo(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME))
-                    .slogan(RandomDataGenerator.getRandomAlphabate(20))
-                    .head_quaters(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME))
-                    .website(RandomDataGenerator.getRandomWebiste())
-                    .established(RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()))
-                    .build();
+                .builder()
+                .id(Integer.parseInt(RandomDataGenerator.getRandomNumber(10)))
+                .name(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME))
+                .country(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY))
+                .logo(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME))
+                .slogan(RandomDataGenerator.getRandomAlphabate(20))
+                .head_quaters(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.CITYNAME))
+                .website(RandomDataGenerator.getRandomWebiste())
+                .established(RandomDataGenerator.getRandomNumber(1900, DateUtils.getCurrentYear()))
+                .build();
     }
 }

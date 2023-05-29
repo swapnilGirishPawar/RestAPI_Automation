@@ -1,6 +1,7 @@
 package airlines;
 
 import airlines.Pojos.Airline;
+import airlines.Pojos.Passenger;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import restUtils.RestUtils;
@@ -17,7 +18,7 @@ public class AirlineAPIs {
         String endPoint = (String) Base.dataFromJsonFile.get("createAirLineEndpoint");
         return RestUtils.performPost(endPoint,createAirlinePayload, new HashMap<>());
     }
-    public Response createPassenger(Map<String, Object> createPassengerPayload){
+    public Response createPassenger(Passenger createPassengerPayload){
         String endPoint = (String) Base.dataFromJsonFile.get("createPassengerEndpoint");
         return RestUtils.performPost(endPoint,createPassengerPayload, new HashMap<>());
     }
