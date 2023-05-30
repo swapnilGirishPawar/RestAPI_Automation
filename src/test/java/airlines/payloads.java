@@ -91,7 +91,7 @@ public class payloads {
     public static Airline getCreateAirlineFromPojo() {
         return Airline
                 .builder()
-                .id(Integer.parseInt(RandomDataGenerator.getRandomNumber(10)))
+                .id(Integer.parseInt(RandomDataGenerator.getRandomNumber(7)))
                 .name(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FIRSTNAME))
                 .country(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.COUNTRY))
                 .logo(RandomDataGenerator.getRandomDataFor(RandomDataTypeNames.FULLNAME))

@@ -4,10 +4,13 @@ import airlines.Pojos.Passenger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
+import org.jvnet.staxex.StAxSOAPBody;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import utils.AssertionsUtils;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 // How to pass env in runtime?
@@ -60,7 +63,22 @@ public class AirlineTests extends AirlineAPIs{
         ObjectMapper objectMapper = new ObjectMapper();
         Airline createAirlineRes = objectMapper.readValue(res.getBody().asString(), Airline.class);
         Assert.assertEquals(createAirlineRes, payload);
+    }
 
+    @Test
+    public void createAirlineAndVerifyWithAssertionCode(){
+        Airline payload = payloads.getCreateAirlineFromPojo();
+        Response response = createAirline(payload);
+        Map<String, Object> expectedValueMap = new HashMap<>();
+        expectedValueMap.put("id", payload.getId());
+        expectedValueMap.put("name", payload.getName());
+        expectedValueMap.put("country", payload.getCountry());
+        expectedValueMap.put("logo", payload.getLogo());
+        expectedValueMap.put("slogan", payload.getSlogan());
+        expectedValueMap.put("head_quaters", payload.getHead_quaters());
+        expectedValueMap.put("website", payload.getWebsite());
+        expectedValueMap.put("established", payload.getEstablished());
+        AssertionsUtils.assertExpectedValueWithJsonPath(response, expectedValueMap);
     }
 
 }
