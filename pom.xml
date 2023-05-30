@@ -25,9 +25,17 @@
     <lombokVersion>1.18.26</lombokVersion>
     <apacheCommonLangVersion>3.12.0</apacheCommonLangVersion>
     <dataFakerVersion>1.9.0</dataFakerVersion>
+    <javersVersion>7.0.0</javersVersion>
   </properties>
 
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.javers/javers-core -->
+    <dependency>
+      <groupId>org.javers</groupId>
+      <artifactId>javers-core</artifactId>
+      <version>${javersVersion}</version>
+    </dependency>
+
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>

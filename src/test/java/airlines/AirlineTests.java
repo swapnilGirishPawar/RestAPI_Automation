@@ -54,6 +54,7 @@ public class AirlineTests extends AirlineAPIs{
     @Test
     public void createAirlineAndVerifyResponse() throws JsonProcessingException {
         Airline payload = new Airline();
+        payload.setCountry("India");
         Response res = createAirline(payload);
         Assert.assertEquals(res.jsonPath().get("name"), payload.getName());
         ObjectMapper objectMapper = new ObjectMapper();
@@ -61,4 +62,5 @@ public class AirlineTests extends AirlineAPIs{
         Assert.assertEquals(createAirlineRes, payload);
 
     }
+
 }
