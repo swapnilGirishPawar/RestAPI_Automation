@@ -1,6 +1,8 @@
 package airlines;
 import airlines.Pojos.Airline;
 import airlines.Pojos.Passenger;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -47,5 +49,16 @@ public class AirlineTests extends AirlineAPIs{
         System.out.println("-----------------------------------------Create Passenger Response-----------------------------------------");
         System.out.println(response.prettyPrint());
         Assert.assertEquals(response.statusCode(), 200);
+    }
+
+    @Test
+    public void createAirlineAndVerifyResponse() throws JsonProcessingException {
+        Airline payload = new Airline();
+        Response res = createAirline(payload);
+        Assert.assertEquals(res.jsonPath().get("name"), payload.getName());
+        ObjectMapper objectMapper = new ObjectMapper();
+        Airline createAirlineRes = objectMapper.readValue(res.getBody().asString(), Airline.class);
+        Assert.assertEquals(createAirlineRes, payload);
+
     }
 }

@@ -1,5 +1,6 @@
 package airlines.Pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,9 +9,12 @@ import utils.DateUtils;
 import utils.RandomDataGenerator;
 import utils.RandomDataTypeNames;
 
+import java.util.stream.Stream;
+
 @Data // this helps to create getter and setters methods
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Builder // this helps to create request payload.
 public class Airline {
     private int id = Integer.parseInt(RandomDataGenerator.getRandomNumber(8));
